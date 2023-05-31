@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         
         navigateToStocksButton.addAction(UIAction { _ in
             // navigate to stock list screen
-            print("Hello")
+            //print("Hello")
             self.navigationController?.pushViewController(UIHostingController(rootView: HomeView()), animated: true)
             
         }, for: .touchUpInside)
