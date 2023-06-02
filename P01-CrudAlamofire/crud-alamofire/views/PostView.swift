@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PostView: View {
+    
+    @StateObject var crud = Crud()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct PostView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostView()
+        Button{
+            crud.save(title: "TitleDemoSwift", content: "ContentDemoSwift")
+        }label : {
+            Text("Save POST")
+        }
     }
 }
