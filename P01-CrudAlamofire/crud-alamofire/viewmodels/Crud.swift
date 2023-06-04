@@ -11,8 +11,10 @@ import Alamofire
 class Crud : ObservableObject {
     @Published var mensaje = ""
     @Published var show = false
+//    @Published var posts = [Posts]()
+    var urlString = ""
     
-    func save (title : String , content : String){
+    func save (title : String , content : String , id: String, edit: Bool){
         let params : Parameters = [
             "title" : title,
             "content" : content
@@ -27,14 +29,24 @@ class Crud : ObservableObject {
                         let json = try JSONSerialization.jsonObject(with: data)
                         let resultJSON = json as! NSDictionary
                         guard let ok  = resultJSON.value(forKey: "ok")else {return}
-                        print (ok)
                         guard let res = resultJSON.value(forKey: "msg") else {return}
-                        print(res)
+                        if ok as! Bool == true {
+                            self.mensaje = res as! String
+                            self.show = true
+                        }else{
+                            self.mensaje = res as! String
+                            self.show = true
+                        }
+                        
                     }catch let error as NSError{
                         print ("Error in JSON", error.localizedDescription)
+                        self.mensaje = "Problem to save POST"
+                        self.show = true
                     }
                 case .failure(let error):
                     print (error)
+                    self.mensaje = "Problem to save POST"
+                    self.show = true
                 }
                 
             }

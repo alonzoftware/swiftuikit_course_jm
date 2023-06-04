@@ -22,17 +22,30 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.blue
         
-        navigateToStocksButton.addAction(UIAction { _ in
-            // navigate to stock list screen
-            //print("Hello")
-            self.navigationController?.pushViewController(UIHostingController(rootView: HomeView()), animated: true)
-            
-        }, for: .touchUpInside)
+//        navigateToStocksButton.addAction(UIAction { _ in
+//            // navigate to stock list screen
+//            //print("Hello")
+//            self.navigationController?.pushViewController(UIHostingController(rootView: HomeView()), animated: true)
+//
+//        }, for: .touchUpInside)
+//        view.addSubview(navigateToStocksButton)
+//        navigateToStocksButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        navigateToStocksButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        view.addSubview(navigateToStocksButton)
+//        let hostingController = UIHostingController(rootView: RatingView(rating: .constant(3)))
+        let hostingController = UIHostingController(rootView: HomeView())
         
-        navigateToStocksButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        navigateToStocksButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        guard let homeView = hostingController.view else { return }
+        homeView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addChild(hostingController)
+        
+        self.view.addSubview(homeView)
+        
+        homeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        homeView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+
     }
 
 
