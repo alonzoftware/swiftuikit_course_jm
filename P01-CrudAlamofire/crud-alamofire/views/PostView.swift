@@ -42,7 +42,7 @@ struct PostView: View {
                 if image == nil {
                     crud.save(title: title, content: content, id: "", edit: false)
                 }else{
-                    //crud.save2(titulo: titulo, contenido: contenido, imagen: inputImage!)
+                    crud.save2(title: title, content: content, imagen: inputImage!)
                 }
                 title = ""
                 content = ""
@@ -67,7 +67,7 @@ struct PostView: View {
             .onChange(of: inputImage) { _ in
                 loadImage()
             }.sheet(isPresented: $showImagePIcker) {
-                //ImagePicker(image: $inputImage)
+                ImagePicker(image: $inputImage)
             }
 
 

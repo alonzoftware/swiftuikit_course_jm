@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A22FDD92A2D5CDE00923F26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A22FDD82A2D5CDE00923F26 /* ImagePicker.swift */; };
 		9A89B0B02A1E736D00F59F58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89B0AF2A1E736D00F59F58 /* AppDelegate.swift */; };
 		9A89B0B22A1E736D00F59F58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89B0B12A1E736D00F59F58 /* SceneDelegate.swift */; };
 		9A89B0B42A1E736D00F59F58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89B0B32A1E736D00F59F58 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A22FDD82A2D5CDE00923F26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		9A89B0AC2A1E736D00F59F58 /* crud-alamofire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "crud-alamofire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A89B0AF2A1E736D00F59F58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A89B0B12A1E736D00F59F58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				9A89B0B82A1E736E00F59F58 /* Assets.xcassets */,
 				9A89B0BA2A1E736E00F59F58 /* LaunchScreen.storyboard */,
 				9A89B0BD2A1E736E00F59F58 /* Info.plist */,
+				9A22FDD82A2D5CDE00923F26 /* ImagePicker.swift */,
 			);
 			path = "crud-alamofire";
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				9A963D362A27AFED00E0FEC5 /* DetailView.swift in Sources */,
 				9A89B0B02A1E736D00F59F58 /* AppDelegate.swift in Sources */,
 				9A963D322A27AFB000E0FEC5 /* PostView.swift in Sources */,
+				9A22FDD92A2D5CDE00923F26 /* ImagePicker.swift in Sources */,
 				9A89B0B22A1E736D00F59F58 /* SceneDelegate.swift in Sources */,
 				9A963D382A27B02800E0FEC5 /* Posts.swift in Sources */,
 			);
