@@ -14,7 +14,7 @@ import Alamofire
 class Crud : ObservableObject {
     @Published var mensaje = ""
     @Published var show = false
-    @Published var posts = [Posts]()
+    @Published var posts : [[String : AnyObject]] = []
     var urlString = ""
     
     func save (title : String , content : String , id: String, edit: Bool){
@@ -64,6 +64,7 @@ class Crud : ObservableObject {
         
         guard let url = URL(string: "https://alonzochoque.net/enews/api/swiftcrud/save.php") else { return }
         
+//        guard let imgData = imagen.pngData() else { return }
         guard let imgData = imagen.jpegData(compressionQuality: 1.0) else { return }
         let nombreImagen = UUID().uuidString
         
@@ -118,16 +119,45 @@ class Crud : ObservableObject {
                 switch response.result {
                 case .success(let data):
                     do{
-                        let json = try JSONDecoder().decode([Posts].self, from: data)
-                        DispatchQueue.main.async {
-                            print(json)
-                            self.posts = json
+                        if let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String : AnyObject]{
+                            
+                            if let total = json["total"] as? Int{
+                                if total > 0 {
+                                    if let postsReq = json["posts"] as? [[String : AnyObject]]{
+                                        self.posts = postsReq
+                                        for index in 0...self.posts.count - 1 {
+                                            let postObj = self.posts[index]
+                                            print(postObj["content"]!)
+                                        }
+                                    }
+                                }
+                            }
+                           
+                            
                         }
+                        
+                        
+                        //let resultJSON = json as! NSDictionary
+//                        guard let postsDecoded  = resultJSON.value(forKey: "posts") else {return}
+                        //print(type(of: postsDecoded))
+//                        for object in postsDecoded {
+                            // do something with object
+//                            print(object)
+//                        }
+//                        let jsonDecode = try JSONDecoder().decode([Post].self, from: postsDecoded as! Data)
+//                        DispatchQueue.main.async {
+//                            print(jsonDecode)
+//                            //self.posts = json
+//                        }
                     }catch let error as NSError {
-                        print("error al mostrar json", error.localizedDescription)
+                        print ("Error in JSON", error.localizedDescription)
+                        self.mensaje = "Problem to show POSTs :: JSON"
+                        self.show = true
                     }
                 case .failure(let error):
-                    print(error)
+                    print (error)
+                    self.mensaje = "Problem to show POSTs :: HTTP Request"
+                    self.show = true
                 }
             }
     }

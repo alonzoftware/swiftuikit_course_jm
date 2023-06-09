@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var crud = Crud()
     var body: some View {
         NavigationView{
             Text("Holafo the Bear")
@@ -15,6 +17,10 @@ struct HomeView: View {
                     NavigationLink(destination: PostView()){
                         Image(systemName: "plus")
                     }
+                }.onAppear{
+                    crud.getData()
+                }.alert(crud.mensaje, isPresented: $crud.show) {
+                    Button("OK", role: .none) {}
                 }
         }
     }
