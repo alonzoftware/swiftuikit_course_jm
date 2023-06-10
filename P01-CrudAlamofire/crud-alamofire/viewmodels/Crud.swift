@@ -14,7 +14,8 @@ import Alamofire
 class Crud : ObservableObject {
     @Published var mensaje = ""
     @Published var show = false
-    @Published var posts : [[String : AnyObject]] = []
+    //    @Published var posts : [[String : AnyObject]] = []
+    @Published var posts : [Post] = []
     var urlString = ""
     
     func save (title : String , content : String , id: String, edit: Bool){
@@ -64,7 +65,7 @@ class Crud : ObservableObject {
         
         guard let url = URL(string: "https://alonzochoque.net/enews/api/swiftcrud/save.php") else { return }
         
-//        guard let imgData = imagen.pngData() else { return }
+        //        guard let imgData = imagen.pngData() else { return }
         guard let imgData = imagen.jpegData(compressionQuality: 1.0) else { return }
         let nombreImagen = UUID().uuidString
         
@@ -124,31 +125,38 @@ class Crud : ObservableObject {
                             if let total = json["total"] as? Int{
                                 if total > 0 {
                                     if let postsReq = json["posts"] as? [[String : AnyObject]]{
-                                        self.posts = postsReq
-                                        for index in 0...self.posts.count - 1 {
-                                            let postObj = self.posts[index]
+                                        for index in 0...postsReq.count - 1 {
+                                            let postObj = postsReq[index]
                                             print(postObj["content"]!)
+                                            self.posts.append(
+                                                Post(id: postObj["id"] as! String,
+                                                     title: postObj["title"] as! String,
+                                                     content: postObj["content"] as! String,
+                                                     image_url: postObj["image_url"] as! String,
+                                                     image_name: postObj["image_name"] as! String
+                                                )
+                                            );
                                         }
                                     }
                                 }
                             }
-                           
+                            
                             
                         }
                         
                         
                         //let resultJSON = json as! NSDictionary
-//                        guard let postsDecoded  = resultJSON.value(forKey: "posts") else {return}
+                        //                        guard let postsDecoded  = resultJSON.value(forKey: "posts") else {return}
                         //print(type(of: postsDecoded))
-//                        for object in postsDecoded {
-                            // do something with object
-//                            print(object)
-//                        }
-//                        let jsonDecode = try JSONDecoder().decode([Post].self, from: postsDecoded as! Data)
-//                        DispatchQueue.main.async {
-//                            print(jsonDecode)
-//                            //self.posts = json
-//                        }
+                        //                        for object in postsDecoded {
+                        // do something with object
+                        //                            print(object)
+                        //                        }
+                        //                        let jsonDecode = try JSONDecoder().decode([Post].self, from: postsDecoded as! Data)
+                        //                        DispatchQueue.main.async {
+                        //                            print(jsonDecode)
+                        //                            //self.posts = json
+                        //                        }
                     }catch let error as NSError {
                         print ("Error in JSON", error.localizedDescription)
                         self.mensaje = "Problem to show POSTs :: JSON"
